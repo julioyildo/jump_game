@@ -41,3 +41,7 @@
     transition-duration: .2s;
   }
   
+
+  .error {
+      color: red;
+  }
