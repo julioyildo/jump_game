@@ -1,6 +1,6 @@
 //VARIABLES
 const button = document.querySelector('.button');
-const table = [1, 2, 3, -1, 3, 1, 1, -2, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
+const table = [1, 2, 3, -1, 3, 1, 1, -10, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
 let i = 0;
 let count = 0;
 const len = table.length;
@@ -20,7 +20,6 @@ class Jump {
     this.addDomEl();
   }
 
-  // Add Dom elements
   addDomEl(tab = this.elementsIds.table) {
     let el;
 
@@ -44,36 +43,39 @@ class Jump {
   }
 
   setError(index) {
-    return (index < len && index >= 0) ? true : false
+    return index < len && index >= 0 ? true : false;
   }
 
   getViewedIndex(index) {
-    return (this.elsViewed.indexOf(index) == -1) ? true : false
+    return this.elsViewed.indexOf(index) == -1 ? true : false;
   }
 
-  // Method to loop in tab
-  setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
+  setViewedColor(el) {
+    el.style.backgroundColor = "#84CCFC"
+    el.style.color = "white"
+  }
 
+  setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
     try {
       // if (i < len && i >= 0) {
-     
-        if (this.getViewedIndex(i + tab[i])) {
-          this.elsViewed.push(i);
-          count = count + Math.abs(tab[i]);
-          i = i + tab[i];
-          console.log(i)
-          if(this.setError(i)){
-            this.moveCursor(tabDom[i]);
 
-          }
-          else {
-            this.errorDom.innerHTML = 'i is out of array';
-          }
+      if (this.getViewedIndex(i + tab[i])) {
+        this.elsViewed.push(i);
+        this.setViewedColor(tabDom[i])
+        count = count + Math.abs(tab[i]);
+        
+        i = i + tab[i];
+        console.log(i);
+        if (this.setError(i)) {
+          this.moveCursor(tabDom[i]);
           
         } else {
-          this.errorDom.innerHTML = 'Stoped because infinit loop. ☹️ ♾ ⛔️';
+          this.errorDom.innerHTML = 'i is out of array';
         }
-      // } 
+      } else {
+        this.errorDom.innerHTML = 'Stoped because infinit loop. ☹️ ♾ ⛔️';
+      }
+      // }
     } catch (err) {
       console.log(err);
     } finally {
@@ -90,4 +92,4 @@ button.addEventListener('click', () => {
   jump.setJump();
 });
 
-console.log(jump.setError(-3))
+console.log(jump.setError(-3));
