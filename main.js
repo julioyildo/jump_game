@@ -1,6 +1,6 @@
 //VARIABLES
 const button = document.querySelector('.button');
-const table = [1, 1, 2, -3, 3, 1, 1, -2, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
+const table = [1, 1, -4, -3, 3, 1, 1, -2, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
 let i = 0;
 let count = 0;
 
@@ -59,7 +59,7 @@ class Jump {
           i = i + tab[i];
           this.moveCursor(tabDom[i]);
         } else {
-          this.errorDom.innerHTML = 'stoped because infinit loop';
+          this.errorDom.innerHTML = 'Stoped because infinit loop. ☹️ ♾ ⛔️';
         }
       } else {
         this.errorDom.innerHTML = 'i is out of array';
