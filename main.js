@@ -1,6 +1,6 @@
 //VARIABLES
 const button = document.querySelector('.button');
-const table = [1, 1, 2, 2, 9, 1, 1, 1, 1, 1, 1, 3,1,2,1,1,2,1];
+const table = [1, 1, 2, -3, 3, 1, 1, -2, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
 let i = 0;
 let count = 0;
 
@@ -38,36 +38,27 @@ class Jump {
     this.cursor.style.transform = `translateX(${pos}px)`;
   }
 
-
-  
   setJumpDom(count) {
     this.jumpDom.innerHTML = count;
   }
-
-
 
   getViewedIndex(index) {
     if (this.elsViewed.indexOf(index) == -1) return true;
     else return false;
   }
 
-
-
-
   // Method to loop in tab
   setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
     const len = tab.length;
 
     try {
-      if (i < len&& i >= 0) {
+      if (i < len && i >= 0) {
         if (this.getViewedIndex(i + tab[i])) {
           this.elsViewed.push(i);
           count = count + Math.abs(tab[i]);
           i = i + tab[i];
           this.moveCursor(tabDom[i]);
-        } 
-
-        else {
+        } else {
           this.errorDom.innerHTML = 'stoped because infinit loop';
         }
       } else {
