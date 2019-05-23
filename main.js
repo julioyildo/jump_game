@@ -1,9 +1,11 @@
 //VARIABLES
 const button = document.querySelector('.button');
+const reverseBtn = document.querySelector('.reverse')
 const table = [1, 2, 3, -1, 3, 1, 1, -10, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
 let i = 0;
 let count = 0;
 const len = table.length;
+let bool = false
 
 //CLASS
 class Jump {
@@ -55,6 +57,16 @@ class Jump {
     el.style.color = "white"
   }
 
+  setReverse() {
+    i = !bool ? len-1: 0
+    bool = !bool ? true: false
+    count = 0
+    this.moveCursor(this.elementsIds.domEls[i]);
+    console.log(bool)
+    console.log(i)
+
+  }
+
   setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
     try {
       // if (i < len && i >= 0) {
@@ -90,6 +102,10 @@ var jump = new Jump(table);
 // Add btn event
 button.addEventListener('click', () => {
   jump.setJump();
+});
+
+reverseBtn.addEventListener('click', () => {
+  jump.setReverse(bool)
 });
 
 console.log(jump.setError(-3));
