@@ -45,12 +45,10 @@ class Jump {
 
   setError(index) {
     return (index < len && index >= 0) ? true : false
-    
   }
 
   getViewedIndex(index) {
-    if (this.elsViewed.indexOf(index) == -1) return true;
-    else return false;
+    return (this.elsViewed.indexOf(index) == -1) ? true : false
   }
 
   // Method to loop in tab
@@ -66,6 +64,7 @@ class Jump {
           console.log(i)
           if(this.setError(i)){
             this.moveCursor(tabDom[i]);
+
           }
           else {
             this.errorDom.innerHTML = 'i is out of array';
