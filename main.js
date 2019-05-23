@@ -1,8 +1,9 @@
 //VARIABLES
 const button = document.querySelector('.button');
-const table = [1, 1, -4, -3, 3, 1, 1, -2, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
+const table = [1, 2, 3, -1, 3, 1, 1, -2, 1, 1, 1, 3, 1, 2, 1, 1, -2, 1];
 let i = 0;
 let count = 0;
+const len = table.length;
 
 //CLASS
 class Jump {
@@ -42,6 +43,11 @@ class Jump {
     this.jumpDom.innerHTML = count;
   }
 
+  setError(index) {
+    return (index < len && index >= 0) ? true : false
+    
+  }
+
   getViewedIndex(index) {
     if (this.elsViewed.indexOf(index) == -1) return true;
     else return false;
@@ -49,21 +55,26 @@ class Jump {
 
   // Method to loop in tab
   setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
-    const len = tab.length;
 
     try {
-      if (i < len && i >= 0) {
+      // if (i < len && i >= 0) {
+     
         if (this.getViewedIndex(i + tab[i])) {
           this.elsViewed.push(i);
           count = count + Math.abs(tab[i]);
           i = i + tab[i];
-          this.moveCursor(tabDom[i]);
+          console.log(i)
+          if(this.setError(i)){
+            this.moveCursor(tabDom[i]);
+          }
+          else {
+            this.errorDom.innerHTML = 'i is out of array';
+          }
+          
         } else {
           this.errorDom.innerHTML = 'Stoped because infinit loop. ☹️ ♾ ⛔️';
         }
-      } else {
-        this.errorDom.innerHTML = 'i is out of array';
-      }
+      // } 
     } catch (err) {
       console.log(err);
     } finally {
@@ -79,3 +90,5 @@ var jump = new Jump(table);
 button.addEventListener('click', () => {
   jump.setJump();
 });
+
+console.log(jump.setError(-3))
