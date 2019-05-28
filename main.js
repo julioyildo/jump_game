@@ -6,6 +6,8 @@ let i = 0;
 let count = 0;
 let len;
 let bool = false;
+
+
 class Jump {
   constructor() {
     this.$elements = {
@@ -25,6 +27,13 @@ class Jump {
     this.initEvents();
   }
 
+
+
+  /*
+    @params : (no)
+    @return: (no)
+    init button click event
+  */
   initEvents() {
     $button.addEventListener('click', () => {
       this.setJump();
@@ -47,7 +56,6 @@ class Jump {
       $el.className = 'el center-column';
       $el.innerHTML = val;
       this.$body.appendChild($el);
-
       this.elementsIds.domEls.push($el);
     });
   }
@@ -107,7 +115,7 @@ class Jump {
     len = this.elementsIds.table.length;
   }
 
-   /*
+  /*
     @params: min, max {Number}
     @return: num {number}
     Get Random number
@@ -129,7 +137,7 @@ class Jump {
     // console.log(i);
   }
 
-   /*
+  /*
     @params: tab, tabDom (tables)
     Function that makes jump
   */
