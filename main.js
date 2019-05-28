@@ -1,12 +1,9 @@
-//CLASS
-const $button = document.querySelector('.button');
-const $reverseBtn = document.querySelector('.reverse');
 
 let i = 0;
 let count = 0;
 let len;
 let bool = false;
-
+let jump = 0;
 
 class Jump {
   constructor() {
@@ -17,29 +14,38 @@ class Jump {
     this.$cursor = document.querySelector('.cursor');
     this.$jumpDom = document.querySelector('.jump');
     this.$errorDom = document.querySelector('.error');
+
+    this.$button = document.querySelector('.button');
+    this.$reverseBtn = document.querySelector('.reverse');
+
     this.elementsIds = {
       table: [],
       domEls: []
     };
+
+    this.jump = 0;
+    this.count = 0;
+    this.len;
+    this.bool = false;
+    this.i = 0
+
     this.elsViewed = [];
     this.getRandomTable(-2, 4);
     this.addDomEl();
     this.initEvents();
   }
 
-
-
   /*
     @params : (no)
     @return: (no)
-    init button click event
+    init buttons click event
   */
   initEvents() {
-    $button.addEventListener('click', () => {
+    this.$button.addEventListener('click', () => {
       this.setJump();
     });
 
-    $reverseBtn.addEventListener('click', () => {
+    this.$reverseBtn.addEventListener('click', () => {
       this.setReverse(bool);
     });
   }
