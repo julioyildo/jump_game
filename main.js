@@ -1,6 +1,6 @@
 
 let i = 0;
-let count = 0;
+// let count = 0;
 let len;
 let bool = false;
 let jump = 0;
@@ -137,7 +137,7 @@ class Jump {
   setReverse() {
     i = !bool ? len - 1 : 0;
     bool = !bool ? true : false;
-    count = 0;
+    this.count = 0;
     this.moveCursor(this.elementsIds.domEls[i]);
     // console.log(bool);
     // console.log(i);
@@ -147,7 +147,7 @@ class Jump {
     @params: tab, tabDom (tables)
     Function that makes jump
   */
-  setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
+  setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls, count = this.count) {
     try {
       if (this.getViewedIndex(i + tab[i])) {
         this.elsViewed.push(i);
