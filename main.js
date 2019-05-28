@@ -1,6 +1,6 @@
 
 let i = 0;
-// let count = 0;
+let count = 0;
 let len;
 let bool = false;
 let jump = 0;
@@ -12,6 +12,7 @@ class Jump {
     };
     this.$body = document.querySelector('.list');
     this.$cursor = document.querySelector('.cursor');
+    this.$countDom = document.querySelector('.count');
     this.$jumpDom = document.querySelector('.jump');
     this.$errorDom = document.querySelector('.error');
 
@@ -23,11 +24,6 @@ class Jump {
       domEls: []
     };
 
-    this.jump = 0;
-    this.count = 0;
-    this.len;
-    this.bool = false;
-    this.i = 0
 
     this.elsViewed = [];
     this.getRandomTable(-2, 4);
@@ -78,8 +74,9 @@ class Jump {
     @params : count {Number}
     Display the count number
   */
-  setJumpDom(count) {
-    this.$jumpDom.innerHTML = count;
+  setJumpDom(count, jump) {
+    this.$countDom.innerHTML = count;
+    this.$jumpDom.innerHTML = jump
   }
 
   /*
@@ -147,7 +144,7 @@ class Jump {
     @params: tab, tabDom (tables)
     Function that makes jump
   */
-  setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls, count = this.count) {
+  setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
     try {
       if (this.getViewedIndex(i + tab[i])) {
         this.elsViewed.push(i);
@@ -155,7 +152,8 @@ class Jump {
         count = count + Math.abs(tab[i]);
 
         i = i + tab[i];
-        console.log(i);
+        jump++
+        console.log('jump', jump);
         if (this.setError(i)) {
           this.moveCursor(tabDom[i]);
         } else {
@@ -167,7 +165,7 @@ class Jump {
     } catch (err) {
       console.log(err);
     } finally {
-      this.setJumpDom(count);
+      this.setJumpDom(count, jump);
     }
   }
 } //End class
