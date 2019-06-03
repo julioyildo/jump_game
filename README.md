@@ -15,10 +15,10 @@ Example:
  
 The count of jumps to leave an array will be 3.
  
-`start position: 0, A[0] == 2`
-`1 jump: 0 + 2 -> position 2, A[2] == 1`
-`2 jump: 2 + 1 -> position 3, A[3] == 4`
-`3 jump: 3 + 4 -> jump out of array`
+`start position: 0, A[0] == 2` <br>
+`1 jump: 0 + 2 -> position 2, A[2] == 1` <br>
+`2 jump: 2 + 1 -> position 3, A[3] == 4` <br>
+`3 jump: 3 + 4 -> jump out of array` <br>
  
 If it is not possible to leave an array, return -1.
  
