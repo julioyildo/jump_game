@@ -1,4 +1,3 @@
-
 let i = 0;
 let count = 0;
 let len;
@@ -23,7 +22,6 @@ class Jump {
       table: [],
       domEls: []
     };
-
 
     this.elsViewed = [];
     this.getRandomTable(-2, 4);
@@ -70,19 +68,20 @@ class Jump {
     const pos = $currentEl.offsetLeft - this.$cursor.offsetLeft;
     this.$cursor.style.transform = `translateX(${pos}px)`;
   }
+
   /*
     @params : count {Number}
-    Display the count number
+    Display the count number in the HTML
   */
   setJumpDom(count, jump) {
     this.$countDom.innerHTML = count;
-    this.$jumpDom.innerHTML = jump
+    this.$jumpDom.innerHTML = jump;
   }
 
   /*
     @params: index {Number}
     @return : {Boolean}
-    Check current index is in the array
+    Check if current index is still in the array
   */
   setError(index) {
     return index < len && index >= 0 ? true : false;
@@ -147,13 +146,15 @@ class Jump {
   setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
     try {
       if (this.getViewedIndex(i + tab[i])) {
+
         this.elsViewed.push(i);
         this.setViewedColor(tabDom[i]);
-        count = count + Math.abs(tab[i]);
 
+        count = count + Math.abs(tab[i]);
         i = i + tab[i];
-        jump++
-        console.log('jump', jump);
+        jump++;
+        // console.log('jump', jump);
+
         if (this.setError(i)) {
           this.moveCursor(tabDom[i]);
         } else {
