@@ -5,7 +5,7 @@ let bool = false;
 let jump = 0;
 
 class Jump {
-  constructor() {
+  constructor(table_length) {
     this.$elements = {
       body: document.querySelector('.list')
     };
@@ -14,7 +14,6 @@ class Jump {
     this.$countDom = document.querySelector('.count');
     this.$jumpDom = document.querySelector('.jump');
     this.$errorDom = document.querySelector('.error');
-
     this.$button = document.querySelector('.button');
     this.$reverseBtn = document.querySelector('.reverse');
 
@@ -22,11 +21,50 @@ class Jump {
       table: [],
       domEls: []
     };
-
+    this.table_length = table_length
     this.elsViewed = [];
     this.getRandomTable(-2, 4);
     this.addDomEl();
     this.initEvents();
+
+  }
+
+  /*
+    @params: min, max {Number}
+    Get table with random values
+  */
+  getRandomTable(min, max, tabLen = this.table_length) {
+    let index;
+    for (index = 0; index <= tabLen; index++) {
+      this.elementsIds.table.push(this.getRandomNumber(min, max));
+    }
+    len = this.elementsIds.table.length;
+  }
+
+  /*
+    @params: min, max {Number}
+    @return: num {number}
+    Get Random number
+  */
+  getRandomNumber(min, max) {
+    const num = Math.floor(Math.random() * (max - min + 1)) + min;
+    return num === 0 ? this.getRandomNumber(min, max) : num;
+  }
+
+  /*
+    @params : tab {Array}
+    Move the dom Cursor
+  */
+  addDomEl(tab = this.elementsIds.table) {
+    let el;
+
+    tab.forEach(val => {
+      el = document.createElement('li');
+      el.className = 'el center-column';
+      el.innerHTML = val;
+      this.$body.appendChild(el);
+      this.elementsIds.domEls.push(el);
+    });
   }
 
   /*
@@ -41,22 +79,6 @@ class Jump {
 
     this.$reverseBtn.addEventListener('click', () => {
       this.setReverse(bool);
-    });
-  }
-
-  /*
-    @params : tab {Array}
-    Move the dom Cursor
-  */
-  addDomEl(tab = this.elementsIds.table) {
-    let $el;
-
-    tab.forEach(val => {
-      $el = document.createElement('li');
-      $el.className = 'el center-column';
-      $el.innerHTML = val;
-      this.$body.appendChild($el);
-      this.elementsIds.domEls.push($el);
     });
   }
 
@@ -90,7 +112,7 @@ class Jump {
   /*
     @params: index {Number}
     @return : {Boolean}
-    Check if current index has been viewed
+    Check if the new current index has been viewed
   */
   getViewedIndex(index) {
     return this.elsViewed.indexOf(index) == -1 ? true : false;
@@ -98,33 +120,11 @@ class Jump {
 
   /*
     @params: el {DOM}
-    Set wiewed DOM elements bkg color
+    Set wiewed DOM elements background color
   */
   setViewedColor($el) {
     $el.style.backgroundColor = '#84CCFC';
     $el.style.color = 'white';
-  }
-
-  /*
-    @params: min, max {Number}
-    Get table with random values
-  */
-  getRandomTable(min, max) {
-    let index;
-    for (index = 0; index <= 10; index++) {
-      this.elementsIds.table.push(this.getRandomNumber(min, max));
-    }
-    len = this.elementsIds.table.length;
-  }
-
-  /*
-    @params: min, max {Number}
-    @return: num {number}
-    Get Random number
-  */
-  getRandomNumber(min, max) {
-    const num = Math.floor(Math.random() * (max - min + 1)) + min;
-    return num === 0 ? this.getRandomNumber(min, max) : num;
   }
 
   /*
@@ -135,43 +135,40 @@ class Jump {
     bool = !bool ? true : false;
     this.count = 0;
     this.moveCursor(this.elementsIds.domEls[i]);
-    // console.log(bool);
-    // console.log(i);
   }
 
   /*
     @params: tab, tabDom (tables)
-    Function that makes jump
+    Main function that performs the jump
   */
   setJump(tab = this.elementsIds.table, tabDom = this.elementsIds.domEls) {
     try {
       if (this.getViewedIndex(i + tab[i])) {
-
         this.elsViewed.push(i);
         this.setViewedColor(tabDom[i]);
-
+        jump++;
         count = count + Math.abs(tab[i]);
         i = i + tab[i];
-        jump++;
-        // console.log('jump', jump);
 
         if (this.setError(i)) {
           this.moveCursor(tabDom[i]);
         } else {
-          this.$errorDom.innerHTML = 'i is out of array';
+          this.$errorDom.innerHTML = 'i is out of array 📤 ';
         }
       } else {
         this.$errorDom.innerHTML = 'Stoped because infinit loop. ☹️ ♾ ⛔️';
       }
     } catch (err) {
       console.log(err);
+
     } finally {
       this.setJumpDom(count, jump);
     }
   }
 } //End class
 
+
 window.addEventListener('DOMContentLoaded', () => {
-  var jump = new Jump();
-  console.log(jump.setError(-3));
+  var jump = new Jump(10);
+  // console.log(jump.setError(-3));
 });
