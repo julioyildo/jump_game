@@ -24,6 +24,6 @@ If it is not possible to leave an array, return -1.
 
 ## To launch the application 
 
-> Step 1 : `git clone https://github.com/julioyildo/jump_game.git`
-> Step 2 : `cd jump_game`
+> Step 1 : `git clone https://github.com/julioyildo/jump_game.git`  <br>
+> Step 2 : `cd jump_game`  <br>
 > Step 3 : open `index.html` in you browser
