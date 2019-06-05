@@ -3,7 +3,6 @@
 A simple script that count the number of jump to get out of an array.
 
 
-
 Given an array of integers, you are initially positioned at the first index of the array.
 Each element in the array represents your jump length from that position.
 Your goal is to find a number of jumps that is necessary to do in order to leave an array.
@@ -22,3 +21,9 @@ The count of jumps to leave an array will be 3.
  
 If it is not possible to leave an array, return -1.
  
+
+## To launch the application 
+
+> Step 1 : `git clone https://github.com/julioyildo/jump_game.git`
+> Step 2 : `cd jump_game`
+> Step 3 : open `index.html` in you browser
